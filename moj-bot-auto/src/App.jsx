@@ -159,7 +159,7 @@ export default function App() {
 
     try {
       const res = await fetch(
-  `http://192.168.1.107:8001/chat?query=${encodeURIComponent(userText)}`
+  `http://chatbot-production-53fa.up.railway.app/chat?query=${encodeURIComponent(userText)}`
 );
       const data = await res.json();
       setMessages(prev => [...prev, {
