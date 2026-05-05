@@ -12,8 +12,8 @@ from datetime import datetime
 import os
 import csv
 from loader import DataLoader
-import psycopg2 # Dodaj import psycopg2
-import mysql.connector # Dodaj import mysql.connector
+import psycopg2 
+
 
 
 df_cache = None
