@@ -1,0 +1,6 @@
+{
+  "data_source": "postgres",
+  "csv_path": "import_auta.csv",
+  "schema_path": "schema.json",
+  "query": "SELECT * FROM public.import_auta"
+}

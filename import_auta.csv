@@ -1,0 +1,101 @@
+marka,model,rocznik,przebieg,uszkodzenie,cena,kraj_pochodzenia
+BMW,3 Series,2020,45000,none,145000,USA
+BMW,3 Series,2019,82000,front_left,112000,Canada
+BMW,3 Series,2021,25000,flood,95000,USA
+BMW,3 Series,2018,120000,rear_bumper,89000,Germany
+BMW,3 Series,2022,15000,none,185000,USA
+BMW,3 Series,2017,145000,engine_failure,65000,Japan
+BMW,3 Series,2020,60000,side_scrape,128000,USA
+BMW,3 Series,2019,95000,none,118000,Canada
+BMW,3 Series,2021,38000,hail,122000,USA
+BMW,3 Series,2018,110000,front_right,92000,USA
+BMW,5 Series,2019,90000,none,165000,Germany
+BMW,5 Series,2020,55000,front_end,135000,USA
+BMW,5 Series,2021,30000,none,210000,USA
+BMW,5 Series,2018,130000,suspension,98000,Canada
+BMW,5 Series,2022,10000,none,265000,Japan
+BMW,5 Series,2017,160000,rear_end,92000,USA
+BMW,5 Series,2020,75000,side_impact,148000,USA
+BMW,5 Series,2019,110000,none,152000,Canada
+BMW,5 Series,2021,42000,hail,178000,USA
+BMW,5 Series,2018,140000,engine_light,105000,USA
+Audi,A4,2020,50000,none,138000,Germany
+Audi,A4,2019,88000,front_bumper,108000,USA
+Audi,A4,2021,20000,none,172000,Canada
+Audi,A4,2018,115000,side_mirror,92000,USA
+Audi,A4,2022,12000,none,195000,USA
+Audi,A4,2017,150000,rear_dent,78000,Japan
+Audi,A4,2020,65000,hail,115000,USA
+Audi,A4,2019,98000,none,112000,Canada
+Audi,A4,2021,45000,front_left,135000,USA
+Audi,A4,2018,130000,none,98000,USA
+Audi,Q5,2019,70000,none,155000,USA
+Audi,Q5,2020,40000,front_end,142000,Canada
+Audi,Q5,2021,15000,none,220000,USA
+Audi,Q5,2018,105000,rear_bumper,125000,Germany
+Audi,Q5,2022,8000,none,275000,USA
+Audi,Q5,2017,140000,suspension,105000,USA
+Audi,Q5,2020,58000,side_scrape,162000,Canada
+Audi,Q5,2019,85000,none,158000,USA
+Audi,Q5,2021,33000,hail,185000,USA
+Audi,Q5,2018,125000,engine_issue,115000,Japan
+Ford,Mustang,2018,85000,front_end,115000,USA
+Ford,Mustang,2019,60000,none,145000,USA
+Ford,Mustang,2020,35000,side_impact,138000,USA
+Ford,Mustang,2017,110000,rear_end,95000,Canada
+Ford,Mustang,2021,15000,none,185000,USA
+Ford,Mustang,2016,130000,flood,72000,USA
+Ford,Mustang,2020,42000,hail,128000,USA
+Ford,Mustang,2019,75000,none,132000,USA
+Ford,Mustang,2021,25000,front_bumper,158000,Japan
+Ford,Mustang,2018,95000,none,108000,Canada
+Ford,F-150,2019,120000,none,165000,USA
+Ford,F-150,2020,80000,front_right,155000,USA
+Ford,F-150,2021,40000,none,245000,USA
+Ford,F-150,2018,150000,rear_dent,125000,Canada
+Ford,F-150,2022,15000,none,320000,USA
+Ford,F-150,2017,180000,suspension,105000,USA
+Ford,F-150,2020,95000,hail,175000,USA
+Ford,F-150,2019,130000,none,158000,Canada
+Ford,F-150,2021,55000,side_scrape,215000,USA
+Ford,F-150,2018,160000,engine_issue,118000,Japan
+Toyota,RAV4,2021,30000,none,155000,Japan
+Toyota,RAV4,2020,55000,front_bumper,125000,USA
+Toyota,RAV4,2019,82000,none,112000,Canada
+Toyota,RAV4,2022,10000,none,185000,USA
+Toyota,RAV4,2018,110000,rear_end,92000,USA
+Toyota,RAV4,2017,140000,hail,78000,USA
+Toyota,RAV4,2020,60000,side_scrape,128000,Canada
+Toyota,RAV4,2019,95000,none,105000,USA
+Toyota,RAV4,2021,40000,front_left,138000,USA
+Toyota,RAV4,2018,125000,none,89000,Germany
+Toyota,Camry,2020,45000,none,115000,USA
+Toyota,Camry,2019,78000,front_end,95000,USA
+Toyota,Camry,2021,22000,none,145000,Japan
+Toyota,Camry,2018,105000,rear_bumper,82000,USA
+Toyota,Camry,2022,5000,none,168000,USA
+Toyota,Camry,2017,135000,flood,58000,Canada
+Toyota,Camry,2020,52000,hail,102000,USA
+Toyota,Camry,2019,88000,none,98000,USA
+Toyota,Camry,2021,35000,side_impact,125000,USA
+Toyota,Camry,2018,120000,none,85000,Japan
+Tesla,Model 3,2021,35000,none,165000,USA
+Tesla,Model 3,2020,60000,front_left,135000,USA
+Tesla,Model 3,2022,15000,none,205000,Canada
+Tesla,Model 3,2019,95000,rear_end,112000,USA
+Tesla,Model 3,2021,28000,hail,148000,USA
+Tesla,Model 3,2018,120000,battery_issue,95000,USA
+Tesla,Model 3,2020,50000,side_scrape,142000,Japan
+Tesla,Model 3,2019,85000,none,128000,USA
+Tesla,Model 3,2021,42000,front_bumper,152000,USA
+Tesla,Model 3,2018,110000,none,118000,USA
+Tesla,Model Y,2022,12000,none,235000,USA
+Tesla,Model Y,2021,30000,front_end,185000,USA
+Tesla,Model Y,2022,8000,none,255000,Canada
+Tesla,Model Y,2020,55000,rear_bumper,168000,USA
+Tesla,Model Y,2021,25000,hail,195000,USA
+Tesla,Model Y,2021,45000,side_impact,178000,USA
+Tesla,Model Y,2022,18000,none,225000,Japan
+Tesla,Model Y,2020,65000,flood,125000,USA
+Tesla,Model Y,2021,38000,front_right,188000,USA
+Tesla,Model Y,2020,70000,none,172000,USA
