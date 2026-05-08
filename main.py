@@ -428,7 +428,16 @@ async def chat(query: str = Query(...)):
     df = embedding_search(query, df, top_k=30)
 
     # Usuń kolumny techniczne przed denormalizacją
-    df = df.drop(columns=["embedding", "text", "score"], errors="ignore")
+    df = df.drop(
+    columns=[
+        "embedding",
+        "text",
+        "score",
+        "damage_embedding",
+        "damage_score"
+    ],
+    errors="ignore"
+)
     
     # Konwertuj nazwy kolumn z angielskich na polskie
     schema = load_schema()
