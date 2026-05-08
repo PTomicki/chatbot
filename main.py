@@ -264,18 +264,25 @@ USER QUERY:
 # =========================
 
 def embedding_search(query, df, top_k=30):
+
+    if "embedding" not in df.columns:
+        return df.head(top_k)
+
+    embeddings_list = df["embedding"].dropna().tolist()
+
+    if len(embeddings_list) == 0:
+        return df.head(top_k)
+
     query_vec = model.encode([query])
 
-    df = df.copy()
-
-    embeddings = np.vstack(df["embedding"].values)
+    embeddings = np.vstack(embeddings_list)
 
     scores = cosine_similarity(query_vec, embeddings)[0]
 
+    df = df.copy()
     df["score"] = scores
 
     return df.sort_values("score", ascending=False).head(top_k)
-
 
 # =========================
 # FILTERS (UNCHANGED LOGIC)
