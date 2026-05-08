@@ -116,7 +116,6 @@ def load_database():
         print("🔄 Encoding embeddings...")
         df["embedding"] = list(model.encode(df["text"].tolist()))
 
-    #damage embedding
     # DAMAGE EMBEDDINGS
     if "damage" in df.columns:
 
@@ -127,6 +126,12 @@ def load_database():
             .str.lower()
             .str.strip()
         )
+
+        print("🔄 Encoding damage embeddings...")
+
+        df["damage_embedding"] = list(
+            model.encode(df["damage"].tolist())
+    )
 
     
     else:
@@ -321,12 +326,38 @@ def apply_filters(df, filters):
             df = df[df["mileage"] <= int(value)]
 
         elif key == "damage":
-            df = df[
-                df["damage"].str.contains(
-                    str(value).lower().strip(),
-                    na=False
-                )
-            ]
+            if "damage_embedding" not in df.columns:
+                continue
+
+            if len(df) == 0:
+                continue
+
+            query_vec = model.encode([
+                str(value).lower().strip()
+            ])
+
+            embeddings_list = (
+                df["damage_embedding"]
+                .dropna()
+                .tolist()
+            )
+
+            if len(embeddings_list) == 0:
+                continue
+
+            damage_embeddings = np.vstack(
+                embeddings_list
+            )
+
+            scores = cosine_similarity(
+                query_vec,
+                damage_embeddings
+            )[0]
+
+    df = df.copy()
+    df["damage_score"] = scores
+
+    df = df[df["damage_score"] > 0.45]
 
     return df
 
