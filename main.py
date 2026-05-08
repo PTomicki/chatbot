@@ -116,6 +116,19 @@ def load_database():
         print("🔄 Encoding embeddings...")
         df["embedding"] = list(model.encode(df["text"].tolist()))
 
+    #damage embedding
+    # DAMAGE EMBEDDINGS
+    if "damage" in df.columns:
+
+        df["damage"] = (
+            df["damage"]
+            .fillna("")
+            .astype(str)
+            .str.lower()
+            .str.strip()
+        )
+
+    
     else:
         # fallback żeby system nie padł
         df["text"] = df.astype(str).agg(" ".join, axis=1)
@@ -174,7 +187,10 @@ OUTPUT JSON:
   "price_min": null,
   "price_max": null,
   "year_min": null,
-  "year_max": null
+  "year_max": null,
+  "damage": null,
+  "km_min": null,
+  "km_max": null
 }}
 
 YEAR UNDERSTANDING:
@@ -188,6 +204,21 @@ KM UNDERSTANDING:
 - "do 50 000 km" → km_max = 50000
 - "poniżej 100k" → km_max = 100000
 - "powyżej 80k" → km_min = 80000
+
+DAMAGE UNDERSTANDING:
+
+If user mentions vehicle condition, accident state or damage type,
+extract it into "damage".
+
+Translate Polish terms into common US auction terminology.
+
+Examples:
+- "bezwypadkowy" -> "clean title"
+- "po wypadku" -> "accident"
+- "zalany" -> "flood damage"
+- "uszkodzony przód" -> "front end damage"
+- "gradobicie" -> "hail damage"
+- "spalony" -> "burn"
 
 STRICT RULES:
 - never guess
@@ -281,6 +312,14 @@ def apply_filters(df, filters):
 
         elif key == "km_max":
             df = df[df["mileage"] <= int(value)]
+
+        elif key == "damage":
+            df = df[
+                df["damage"].str.contains(
+                    str(value).lower().strip(),
+                    na=False
+                )
+            ]
 
     return df
 

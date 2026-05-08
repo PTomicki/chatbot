@@ -3,5 +3,6 @@
   "model": "model",
   "year": "rocznik",
   "price": "cena",
-  "mileage": "przebieg"
+  "mileage": "przebieg",
+  "damage": "uszkodzenie"
 }
