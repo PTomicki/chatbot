@@ -354,10 +354,10 @@ def apply_filters(df, filters):
                 damage_embeddings
             )[0]
 
-    df = df.copy()
-    df["damage_score"] = scores
+            df = df.copy()
+            df["damage_score"] = scores
 
-    df = df[df["damage_score"] > 0.45]
+            df = df[df["damage_score"] > 0.45]
 
     return df
 
