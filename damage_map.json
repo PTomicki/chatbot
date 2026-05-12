@@ -1,0 +1,46 @@
+{
+  "clean": [
+    "none"
+  ],
+
+  "front_end": [
+    "front_end",
+    "front_left",
+    "front_right",
+    "front_bumper"
+  ],
+
+  "rear_end": [
+    "rear_end",
+    "rear_bumper",
+    "rear_dent"
+  ],
+
+  "side": [
+    "side_impact",
+    "side_scrape",
+    "side_mirror"
+  ],
+
+  "engine": [
+    "engine_failure",
+    "engine_issue",
+    "engine_light"
+  ],
+
+  "suspension": [
+    "suspension"
+  ],
+
+  "flood": [
+    "flood"
+  ],
+
+  "hail": [
+    "hail"
+  ],
+
+  "battery": [
+    "battery_issue"
+  ]
+}

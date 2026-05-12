@@ -26,7 +26,8 @@ def load_config():
         return json.load(f)
 
 CONFIG = load_config()
-
+with open("damage_map.json", "r", encoding="utf-8") as f:
+    DAMAGE_MAP = json.load(f)
 # =========================
 # SCHEMA LOADER
 # =========================
@@ -118,7 +119,6 @@ def load_database():
 
     # DAMAGE EMBEDDINGS
     if "damage" in df.columns:
-
         df["damage"] = (
             df["damage"]
             .fillna("")
@@ -126,12 +126,6 @@ def load_database():
             .str.lower()
             .str.strip()
         )
-
-        print("🔄 Encoding damage embeddings...")
-
-        df["damage_embedding"] = list(
-            model.encode(df["damage"].tolist())
-    )
 
     
     else:
@@ -211,19 +205,28 @@ KM UNDERSTANDING:
 - "powyżej 80k" → km_min = 80000
 
 DAMAGE UNDERSTANDING:
+Map damage intent into ONE canonical category.
 
-If user mentions vehicle condition, accident state or damage type,
-extract it into "damage".
-
-Translate Polish terms into common US auction terminology.
+Allowed values:
+- clean
+- front_end
+- rear_end
+- side
+- engine
+- suspension
+- flood
+- hail
+- battery
 
 Examples:
-- "bezwypadkowy" -> "clean title"
-- "po wypadku" -> "accident"
-- "zalany" -> "flood damage"
-- "uszkodzony przód" -> "front end damage"
-- "gradobicie" -> "hail damage"
-- "spalony" -> "burn"
+- "bezwypadkowy" -> "clean"
+- "uszkodzony przód" -> "front_end"
+- "strzał z tyłu" -> "rear_end"
+- "uszkodzony bok" -> "side"
+- "problem z silnikiem" -> "engine"
+- "problem z baterią" -> "battery"
+- "zalany" -> "flood"
+- "gradobicie" -> "hail"
 
 STRICT RULES:
 - never guess
@@ -326,38 +329,21 @@ def apply_filters(df, filters):
             df = df[df["mileage"] <= int(value)]
 
         elif key == "damage":
-            if "damage_embedding" not in df.columns:
+
+            damage_key = str(value).lower().strip()
+
+            if damage_key not in DAMAGE_MAP:
                 continue
 
-            if len(df) == 0:
-                continue
+            possible_values = [
+                v.lower().strip()
+                for v in DAMAGE_MAP[damage_key]
+            ]
 
-            query_vec = model.encode([
-                str(value).lower().strip()
-            ])
-
-            embeddings_list = (
-                df["damage_embedding"]
-                .dropna()
-                .tolist()
-            )
-
-            if len(embeddings_list) == 0:
-                continue
-
-            damage_embeddings = np.vstack(
-                embeddings_list
-            )
-
-            scores = cosine_similarity(
-                query_vec,
-                damage_embeddings
-            )[0]
-
-            df = df.copy()
-            df["damage_score"] = scores
-
-            df = df[df["damage_score"] > 0.45]
+            df = df[
+                df["damage"]
+                .isin(possible_values)
+            ]
 
     return df
 
