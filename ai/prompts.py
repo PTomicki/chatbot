@@ -8,13 +8,13 @@ def get_prompt(query: str, context: dict = None) -> str:
     return f"""
 You are an intelligent intent extraction system for a car marketplace.
 
-Extract structured filters ONLY.
+Your job is to UNDERSTAND user intent and convert it into structured filters.
 
-BRANDS:
-{brands}
+DO NOT guess. Only extract what is clearly stated.
 
-MODELS:
-{models}
+DATABASE CONTEXT:
+- brands: {brands}
+- models: {models}
 
 OUTPUT JSON:
 {{
@@ -29,9 +29,45 @@ OUTPUT JSON:
   "km_max": null
 }}
 
-RULES:
+YEAR UNDERSTANDING:
+- "z 2020 roku" → year_min = 2020, year_max = 2020
+- "po 2020" → year_min = 2021
+- "młodsze niż 2020" → year_min = 2021
+- "starsze niż 2020" → year_max = 2019
+- "do 2020" → year_max = 2020
+
+KM UNDERSTANDING:
+- "do 50 000 km" → km_max = 50000
+- "poniżej 100k" → km_max = 100000
+- "powyżej 80k" → km_min = 80000
+
+DAMAGE UNDERSTANDING:
+Map damage intent into ONE canonical category.
+
+Allowed values:
+- clean
+- front_end
+- rear_end
+- side
+- engine
+- suspension
+- flood
+- hail
+- battery
+
+Examples:
+- "bezwypadkowy" -> "clean"
+- "uszkodzony przód" -> "front_end"
+- "strzał z tyłu" -> "rear_end"
+- "uszkodzony bok" -> "side"
+- "problem z silnikiem" -> "engine"
+- "problem z baterią" -> "battery"
+- "zalany" -> "flood"
+- "gradobicie" -> "hail"
+
+STRICT RULES:
 - never guess
-- return ONLY JSON
+- only extract
 
 USER QUERY:
 {query}

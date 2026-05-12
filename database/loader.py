@@ -1,8 +1,10 @@
 import os
+import json
 import pandas as pd
 import psycopg2
 import requests
 
+from database.normalizer import normalize_df
 
 # =========================
 # GLOBAL CACHE
@@ -13,6 +15,16 @@ df_cache = None
 def get_cache():
     global df_cache
     return df_cache
+
+
+# =========================
+# SCHEMA LOADER
+# =========================
+def load_schema(config):
+    schema_path = config.get("schema_path", "schema.json")
+
+    with open(schema_path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
 
 # =========================
@@ -35,11 +47,19 @@ def load_database(config):
     else:
         raise Exception(f"Unknown data source: {source}")
 
+    # =========================
+    # NORMALIZATION STEP (IMPORTANT)
+    # =========================
+    schema = load_schema(config)
+
     df.columns = df.columns.str.lower().str.strip()
+
+    df = normalize_df(df, schema)
 
     df_cache = df
 
     print(f"✅ DATABASE LOADED: {len(df)} rows")
+    print(f"📊 COLUMNS: {df.columns.tolist()}")
 
     return df
 
@@ -65,6 +85,9 @@ def _load_csv(config):
 # =========================
 def _load_postgres(config):
     DATABASE_URL = os.getenv("DATABASE_URL")
+
+    if not DATABASE_URL:
+        raise Exception("DATABASE_URL not set")
 
     conn = psycopg2.connect(DATABASE_URL)
 
