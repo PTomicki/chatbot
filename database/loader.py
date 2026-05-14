@@ -56,12 +56,31 @@ def load_database(config):
 
     df = normalize_df(df, schema)
 
+# =========================
+# CLEAN NUMERIC COLUMNS
+# =========================
+
+    numeric_cols = ["price", "year", "mileage"]
+
+    for col in numeric_cols:
+
+        if col in df.columns:
+
+            df[col] = (
+                df[col]
+                .astype(str)
+                .str.replace(" ", "", regex=False)
+                .str.replace(",", "", regex=False)
+            )
+
+            df[col] = pd.to_numeric(
+                df[col],
+                errors="coerce"
+            )
+
+            df[col] = df[col].fillna(0).astype(int)
+
     df_cache = df
-
-    print(f"✅ DATABASE LOADED: {len(df)} rows")
-    print(f"📊 COLUMNS: {df.columns.tolist()}")
-
-    return df
 
 
 # =========================
